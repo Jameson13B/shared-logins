@@ -7,7 +7,7 @@ import { collection, onSnapshot, query } from 'firebase/firestore'
 import { NewCred } from './NewCred'
 
 function App() {
-  const isSmall = useMediaQuery('(max-width: 500px)')
+  const isSmall = useMediaQuery('(max-width: 678px)')
   const [messageApi, contextHolder] = message.useMessage()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [credentials, setCredentials] = useState()
@@ -47,7 +47,7 @@ function App() {
     <Flex vertical style={{ height: '100vh' }}>
       <h1
         style={{
-          width: isSmall ? '85%' : '30%',
+          width: '85%',
           margin: '20px auto',
           textAlign: 'center',
           fontSize: '2.5rem',
@@ -61,17 +61,25 @@ function App() {
           enterButton="Unlock"
           size="large"
           onSearch={handleAuth}
-          style={{ width: isSmall ? '85%' : '30%', margin: '0 auto 20px' }}
+          style={{ width: '85%', maxWidth: '400px', margin: '0 auto 20px' }}
         />
       ) : (
         <Button
           onClick={() => setOpen(true)}
-          style={{ width: isSmall ? '85%' : '30%', margin: '0 auto 20px' }}
+          style={{ width: '85%', maxWidth: '400px', margin: '0 auto 20px' }}
         >
           Add login
         </Button>
       )}
-      <Flex justify="space-evenly" wrap="wrap" style={{ overflow: 'auto' }}>
+      <Flex
+        justify="space-evenly"
+        wrap="wrap"
+        style={{
+          width: '85%',
+          margin: '0 auto 20px',
+          overflow: 'auto',
+        }}
+      >
         {credentials?.map((cred) => {
           return (
             <Card
@@ -93,8 +101,9 @@ function App() {
               }
               key={cred.id}
               title={cred.name}
-              style={{ width: isSmall ? '85%' : '30%', marginBottom: 20 }}
+              style={{ width: isSmall ? '100%' : '40%', marginBottom: 20 }}
               size="small"
+              type="inner"
             >
               <Skeleton
                 loading={!isAuthenticated}

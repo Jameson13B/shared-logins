@@ -14,13 +14,19 @@ export const NewCred = (props) => {
     setPassword('')
   }
   const onSubmit = () => {
-    console.log('HERE', name, username, password)
-    props.messageApi.open({
-      type: 'success',
-      content: 'New login created',
-    })
-    addCredentials({ name, username, password })
-    onClose()
+    if (!name || !username || !password) {
+      props.messageApi.open({
+        type: 'error',
+        content: 'All fields are required',
+      })
+    } else {
+      props.messageApi.open({
+        type: 'success',
+        content: 'New login created',
+      })
+      addCredentials({ name, username, password })
+      onClose()
+    }
   }
   return (
     <>
